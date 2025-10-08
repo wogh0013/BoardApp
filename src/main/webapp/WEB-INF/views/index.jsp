@@ -6,6 +6,6 @@
 </head>
 <body>
 <h2>Welcome to EZBoard!</h2>
-<p><a href="/board/list">게시판 바로가기</a></p>
+<p><a href="/board/list">게시판 바로가기 </a></p>
 </body>
 </html>
