@@ -12,8 +12,8 @@
         <put-attribute name="body" value="" />
     </definition>
 
-    <definition name="user/mainWelcome" extends="baseLayout">
-        <put-attribute name="body" value="/WEB-INF/views/user/mainWelcome.jsp" />
+    <definition name="user/*" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/views/user/{1}.jsp" />
     </definition>
 
     <definition name="board/list" extends="baseLayout">
