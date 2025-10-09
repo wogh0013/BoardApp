@@ -13,14 +13,25 @@ public class UserService {
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    /* 회원가입 */
     public void join(UserDto userDto) {
         userDto.setUserPw(passwordEncoder.encode(userDto.getUserPw()));
         userMapper.insertUser(userDto);
     }
 
-    public String getUserId(String userId){
-        String existUserId = userMapper.getUserId(userId);
+    /* 회원가입 시 ID 중복 여부 체크 */
+    public String selectUserId(String userId){
+        return userMapper.selectUserId(userId);
+    }
 
-        return existUserId;
+    /* 로그인 */
+    public UserDto login(String userId, String userPw){
+        UserDto dbUser = userMapper.selectUserById(userId);
+        //패스워드 검증
+        if (dbUser != null && passwordEncoder.matches(userPw, dbUser.getUserPw())) {
+            return dbUser;
+        }
+
+        return null;
     }
 }

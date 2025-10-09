@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,9 +42,9 @@ public class UserController {
             return "user/join";
         }
 
-        String userId = userService.getUserId(userDto.getUserId());
+        String userId = userService.selectUserId(userDto.getUserId());
         if(userId != null && !userId.isEmpty()){
-            redirectAttributes.addFlashAttribute("existMsg", "이미 존재하는 ID입니다.");
+            redirectAttributes.addFlashAttribute("existMsg", "이미 존재하는 아이디입니다.");
             return "redirect:/join";
         }
 
@@ -56,5 +57,20 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm() {
         return "user/login";
+    }
+
+    @PostMapping("/login")
+    public String login(String userId, String userPw, HttpSession session, Model model){
+        UserDto user = userService.login(userId, userPw);
+
+        if(user != null){
+            session.setAttribute("loginUser", user);
+            return "redirect:/";
+        } else {
+            model.addAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다.");
+            model.addAttribute("userId", userId);
+            model.addAttribute("userPw", userPw);
+            return "user/login";
+        }
     }
 }
