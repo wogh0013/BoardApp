@@ -3,6 +3,7 @@ package com.group.board.controller.user;
 import com.group.board.domain.user.UserDto;
 import com.group.board.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/join")
@@ -51,7 +53,7 @@ public class JoinController {
 
         if (!userDto.getUserPw().equals(userDto.getUserPwConfirm())) {
             redirectAttributes.addFlashAttribute("notMatchMsg", "비밀번호가 일치하지 않습니다.");
-
+            return "redirect:/join";
         }
 
         userService.join(userDto);
