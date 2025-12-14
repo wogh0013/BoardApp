@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <script>
 $(document).ready(function(){
@@ -47,6 +48,12 @@ $(document).ready(function(){
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     </c:forEach>
+</c:if>
+
+<c:if test="${not empty msgCode}">
+    <div class="alert alert-info text-center">
+        <spring:message code="${msgCode}" />
+    </div>
 </c:if>
 
 <div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">

@@ -46,18 +46,19 @@ public class JoinController {
 
         String userId = userService.selectUserId(userDto.getUserId());
         if (userId != null && !userId.isEmpty()) {
-            redirectAttributes.addFlashAttribute("existMsg", "이미 존재하는 아이디입니다.");
-            model.addAttribute("existMsg", "이미 존재하는 아이디입니다.");
+            redirectAttributes.addFlashAttribute("msgCode", "error.id.duplicate");
+            redirectAttributes.addFlashAttribute("userDto", userDto);
             return "redirect:/join";
         }
 
         if (!userDto.getUserPw().equals(userDto.getUserPwConfirm())) {
-            redirectAttributes.addFlashAttribute("notMatchMsg", "비밀번호가 일치하지 않습니다.");
+            redirectAttributes.addFlashAttribute("msgCode", "error.password.notmatch");
+            redirectAttributes.addFlashAttribute("userDto", userDto);
             return "redirect:/join";
         }
 
         userService.join(userDto);
-        redirectAttributes.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+        redirectAttributes.addFlashAttribute("msgCode", "success.join.complete");
 
         return "redirect:/login";
     }

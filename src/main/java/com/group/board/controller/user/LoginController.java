@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,18 +25,20 @@ public class LoginController {
 
     /* 로그인 */
     @PostMapping("/login")
-    public String login(String userId, String userPw, HttpSession session, Model model) {
+    public String login(String userId, String userPw, HttpSession session, RedirectAttributes redirectAttributes) {
         UserDto user = userService.login(userId, userPw);
 
+        //로그인 성공 및 로그인유저 세션 생성
         if (user != null) {
-            session.setAttribute("loginUser", user);    //로그인유저 세션 생성
+            session.setAttribute("loginUser", user);
             return "redirect:/";
-        } else {
-            model.addAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다.");
-            model.addAttribute("userId", userId);
-            model.addAttribute("userPw", userPw);
-            return "user/login";
         }
+
+        redirectAttributes.addFlashAttribute("msgCode", "error.login.failed");
+        redirectAttributes.addFlashAttribute("userId", userId);
+        redirectAttributes.addFlashAttribute("userPw", userPw);
+
+        return "redirect:/login";
     }
 
     /* 로그아웃 */

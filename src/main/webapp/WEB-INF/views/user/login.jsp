@@ -1,16 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<c:if test="${not empty msg}">
-  <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-    ${msg}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-</c:if>
-
-<c:if test="${not empty loginError}">
-  <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-    ${loginError}
+<c:if test="${not empty msgCode}">
+  <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <spring:message code="${msgCode}" />
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 </c:if>
