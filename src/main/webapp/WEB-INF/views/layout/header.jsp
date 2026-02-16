@@ -17,8 +17,8 @@
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav align-items-center">
 
-        <%-- 로그인 상태 --%>
         <c:choose>
+          <%-- 로그인 상태 --%>
           <c:when test="${not empty sessionScope.loginUser}">
             <li class="nav-item">
               <span class="nav-link text-success" style="cursor:default;">
@@ -28,6 +28,7 @@
 
             <li class="nav-item"><a class="nav-link text-secondary px-2" href="/">홈</a></li>
             <li class="nav-item"><a class="nav-link text-secondary px-2" href="/board/list">Seoul-Eats</a></li>
+            <li class="nav-item"><a class="nav-link text-secondary px-2" href="/user/mypage">마이페이지</a></li>
             <li class="nav-item">
               <form action="/logout" method="post" class="m-0 p-0" onsubmit="return confirm('정말 로그아웃하시겠습니까?');">
                 <button type="submit" class="nav-link btn btn-link p-0 text-secondary px-2" style="text-decoration:none;">

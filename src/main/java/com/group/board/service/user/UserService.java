@@ -34,4 +34,9 @@ public class UserService {
 
         return null;
     }
+
+    /* 회원탈퇴 */
+    public void deleteUser(String userId){
+        userMapper.deleteUser(userId);
+    }
 }

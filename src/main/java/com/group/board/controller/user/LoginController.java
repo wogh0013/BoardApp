@@ -4,7 +4,6 @@ import com.group.board.domain.user.UserDto;
 import com.group.board.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,7 +35,6 @@ public class LoginController {
 
         redirectAttributes.addFlashAttribute("msgCode", "error.login.failed");
         redirectAttributes.addFlashAttribute("userId", userId);
-        redirectAttributes.addFlashAttribute("userPw", userPw);
 
         return "redirect:/login";
     }

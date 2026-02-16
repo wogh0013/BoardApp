@@ -11,4 +11,6 @@ public interface UserMapper {
     String selectUserId(String userId);
 
     UserDto selectUserById(String userId);
+
+    void deleteUser(String userId);
 }
