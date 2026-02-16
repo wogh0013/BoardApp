@@ -7,6 +7,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: wo0013
+  sql:
+    init:
+      mode: always
   application:
     name: board
 

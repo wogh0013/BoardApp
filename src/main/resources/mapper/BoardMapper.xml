@@ -5,5 +5,29 @@
 
 <mapper namespace="com.group.board.mapper.BoardMapper">
 
+    <select id="selectRestaurantList" resultType="restaurantDto">
+        select
+        id,
+        name,
+        area,
+        menu,
+        memo
+        from restaurant_board
+        order by id desc
+    </select>
+
+    <insert id="insertRestaurant" parameterType="restaurantDto">
+    insert into restaurant_board (
+    name,
+    area,
+    menu,
+    memo
+    ) values (
+    #{name},
+    #{area},
+    #{menu},
+    #{memo}
+    )
+    </insert>
 
 </mapper>
